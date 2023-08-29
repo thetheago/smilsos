@@ -1,0 +1,44 @@
+{
+  "name": "smilsos",
+  "version": "0.0.0.2",
+  "main": "dist/index.html",
+  "scripts": {
+    "start": "webpack serve --mode development",
+    "prepare": "npm run clean && npm run build",
+    "upload": "sos applet upload",
+    "escheck": "npx es-check es5 dist/*.js",
+    "build": "webpack --mode production && npm run escheck",
+    "postbuild": "npm run escheck",
+    "connect": "webpack --watch",
+    "release": "npm run build-prod && sos applet upload --entry-file-path dist/index.html",
+    "build-prod": "npm run clean && cross-env NODE_ENV=production webpack",
+    "clean": "del-cli --force cache dist/*"
+  },
+  "files": [
+    "dist"
+  ],
+  "description": "signageOS applet",
+  "repository": {},
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "@babel/core": "^7.22.11",
+    "@babel/preset-env": "^7.22.10",
+    "@signageos/front-applet": "^5.12.2",
+    "@signageos/front-display": "^12.4.0",
+    "@signageos/webpack-plugin": "^1.0.3",
+    "babel-loader": "^8.3.0",
+    "css-loader": "^6.8.1",
+    "html-webpack-plugin": "^5.5.3",
+    "style-loader": "^3.3.3",
+    "webpack": "^5.88.2",
+    "webpack-cli": "^4.10.0",
+    "webpack-dev-server": "^4.15.1"
+  },
+  "sos": {
+    "appletUid": ""
+  },
+  "dependencies": {
+    "cross-env": "^7.0.3",
+    "del-cli": "^5.0.1"
+  }
+}
